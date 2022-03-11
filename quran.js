@@ -11,7 +11,7 @@ const showChapters = chapters => {
         chapter.classList.add('col');
         chapter.innerHTML = `
         
-                    <div onclick="chapterClick(${element.id})"
+                    <div onclick="chapterClick(${element.id}, '${element.name_simple}', '${element.name_arabic}')"
                         class="d-flex justify-content-between align-items-center border border-2 border-secondary m-2 p-2">
                         <div>
                             <h1>{${element.id}}</h1>
@@ -29,8 +29,11 @@ const showChapters = chapters => {
         document.getElementById('homepage').appendChild(chapter);
     });
 }
-const chapterClick = id => {
-    document.getElementById('homepage').textContent = '';
+const chapterClick = (id, en, ar) => {
+    document.getElementById('frontpage').style.display='none';
+    document.getElementById('chapter').style.display='block';
+    document.getElementById('chapter-name').style.display='block';
+    document.getElementById('chapter-name').innerText=`${en} : ${ar}`;
     fetch('https://api.quran.com/api/v4/quran/verses/uthmani')
         .then(res => res.json())
         .then(data => showVerses(data.verses, id))
@@ -46,4 +49,10 @@ const showVerses = (verses, id) => {
         ayat.innerHTML = `${element.text_uthmani} (${verseNumber++}) `;
         document.getElementById('chapter').appendChild(ayat);
     });
+}
+const versesToHome=()=>{
+    document.getElementById('frontpage').style.display='block';
+    document.getElementById('chapter').style.display='none';
+    document.getElementById('chapter-name').style.display='none';
+    
 }
