@@ -18,7 +18,7 @@ const showChapters = chapters => {
                         </div>
                         <div>
                             <h2>${element.name_simple}</h2>
-                            <h6>${element.revelation_place} | ${element.verses_count} Verses</h6>
+                            <h6 class="text-capitalize">${element.revelation_place} | ${element.verses_count} Verses</h6>
                         </div>
                         <div>
                             <h1>${element.name_arabic}</h1>
@@ -40,10 +40,10 @@ const showVerses = (verses, id) => {
 
 
     const chapterVerses = verses.filter(verse => parseInt(verse.verse_key) === id);
-    console.log(chapterVerses);
+    let verseNumber = 1;
     chapterVerses.forEach(element => {
         const ayat = document.createElement('span');
-        ayat.innerHTML = `${element.text_uthmani} (${element.id}) `;
+        ayat.innerHTML = `${element.text_uthmani} (${verseNumber++}) `;
         document.getElementById('chapter').appendChild(ayat);
     });
 }
