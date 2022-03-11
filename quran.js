@@ -22,9 +22,10 @@ const showChapters = chapters => {
     console.log(chapters)
     chapters.forEach(element => {
         const chapter = document.createElement('div');
+        chapter.classList.add('col');
         chapter.innerHTML = `
-        <div class="col">
-                    <div
+        
+                    <div onclick="chapterClick(${element.id})"
                         class="d-flex justify-content-between align-items-center border border-2 border-secondary m-2 p-2">
                         <div>
                             <h1>{${element.id}}</h1>
@@ -37,8 +38,11 @@ const showChapters = chapters => {
                             <h1>${element.name_arabic}</h1>
                         </div>
                     </div>
-                </div>
+               
         `;
         document.getElementById('homepage').appendChild(chapter);
     });
+}
+const chapterClick=id=>{
+    console.log(id);
 }
