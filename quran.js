@@ -6,7 +6,6 @@ const chapters = () => {
 }
 chapters();
 const showChapters = chapters => {
-    console.log(chapters)
     chapters.forEach(element => {
         const chapter = document.createElement('div');
         chapter.classList.add('col');
@@ -30,21 +29,21 @@ const showChapters = chapters => {
         document.getElementById('homepage').appendChild(chapter);
     });
 }
-const chapterClick=id=>{
-    console.log(id);
-        fetch('https://api.quran.com/api/v4/quran/verses/uthmani')
-    .then(res => res.json())
-    .then(data => showVerses(data.verses))
+const chapterClick = id => {
+    document.getElementById('homepage').textContent = '';
+    fetch('https://api.quran.com/api/v4/quran/verses/uthmani')
+        .then(res => res.json())
+        .then(data => showVerses(data.verses, id))
 }
 
-verses();
+const showVerses = (verses, id) => {
 
 
-// const showVerses=verses=>{
-//     console.log(verses)
-//     verses.forEach(element => {
-//         const ayat=document.createElement('span');
-//         ayat.innerHTML=`${element.text_uthmani} (${element.id}) `;
-//         document.getElementById('page').appendChild(ayat);
-//     });
-// }
+    const chapterVerses = verses.filter(verse => parseInt(verse.verse_key) === id);
+    console.log(chapterVerses);
+    chapterVerses.forEach(element => {
+        const ayat = document.createElement('span');
+        ayat.innerHTML = `${element.text_uthmani} (${element.id}) `;
+        document.getElementById('chapter').appendChild(ayat);
+    });
+}
